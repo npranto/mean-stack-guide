@@ -1,0 +1,22 @@
+{
+  "name": "mean-stack-guide",
+  "version": "1.0.0",
+  "description": "Learn a complete walkthrough of build a complete MEAN application front to back Edit",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": "https://github.com/npranto/mean-stack-guide.git",
+  "author": "Nazmuz Shakib Pranto <npranto@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.9.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1"
+  }
+}
