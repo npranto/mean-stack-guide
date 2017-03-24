@@ -5,7 +5,8 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const users = require('./routes/users.routes');
+const masterRoutes = require('./server/master.routes');
+const config = require('./config/database');
 
 const app = express();  // initializes app with express
 const PORT = 9999;      // sets port number, which will be the localhost that the app will be served on
@@ -18,12 +19,23 @@ app.use(cors());
 // initializes body-parser middleware
 app.use(bodyParser.json());
 
-app.get('/', (req, res)=>{
-    res.send('HOME Endpoint');
+// serves static files (public/client files) in express
+app.use('/', express.static(path.join(__dirname, 'public')))
+
+// passes the express app to masterRoutes, which controls all the API routes
+masterRoutes(app);
+
+
+
+// connect to the database
+mongoose.connect(config.database);
+
+// on connect
+mongoose.connection.on('connected', ()=>{
+    console.log(`Connected to database ${config.database}`);
 })
 
-// tells app to use the users routes methods whenever the route has '/users' in it
-app.use('/users', users);
+
 
 // tells app to start listening to the server
 app.listen(PORT, ()=>{
