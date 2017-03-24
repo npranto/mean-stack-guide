@@ -32,10 +32,13 @@ mongoose.connect(config.database);
 
 // on connect
 mongoose.connection.on('connected', ()=>{
-    console.log(`Connected to database ${config.database}`);
+    console.log(`Connected to database: ${config.database}`);
 })
 
-
+// on error
+mongoose.connection.on('error', (error)=>{
+    console.log(`Error in Database: ${error}`);
+})
 
 // tells app to start listening to the server
 app.listen(PORT, ()=>{
