@@ -40,6 +40,8 @@ mongoose.connection.on('error', (error)=>{
     console.log(`Error in Database: ${error}`);
 })
 
+
+
 // tells app to start listening to the server
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`);
