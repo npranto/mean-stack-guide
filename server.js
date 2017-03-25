@@ -25,7 +25,11 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 // passes the express app to masterRoutes, which controls all the API routes
 masterRoutes(app);
 
+// initilizes passport lib middleware, for authentication in expess
+app.use(passport.initialize());
 
+// initilizing passport session
+app.use(passport.session());
 
 // connect to the database
 mongoose.connect(config.database);
@@ -39,6 +43,7 @@ mongoose.connection.on('connected', ()=>{
 mongoose.connection.on('error', (error)=>{
     console.log(`Error in Database: ${error}`);
 })
+
 
 
 
