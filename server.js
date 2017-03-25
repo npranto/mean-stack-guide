@@ -20,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // serves static files (public/client files) in express
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // passes the express app to masterRoutes, which controls all the API routes
 masterRoutes(app);
@@ -35,7 +35,7 @@ mongoose.connection.on('connected', ()=>{
     console.log(`Connected to database: ${config.database}`);
 })
 
-// on error
+// on connect error
 mongoose.connection.on('error', (error)=>{
     console.log(`Error in Database: ${error}`);
 })
