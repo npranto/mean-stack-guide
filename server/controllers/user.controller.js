@@ -80,7 +80,9 @@ module.exports = {
     },
 
     getUserProfile(req, res, next){
-        res.send('PROFILE')
+        res.json({
+            currentUser: req.user
+        });
     },
 
     validate(req, res, next){
