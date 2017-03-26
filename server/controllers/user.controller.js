@@ -1,4 +1,7 @@
+const jwt = require('jsonwebtoken');
+
 const User = require('./../models/user.schema');
+const databaseConfig = require('./../../config/database.config');
 
 module.exports = {
 
@@ -13,24 +16,72 @@ module.exports = {
             if (err){
                 res.status(500).json({
                     success: false,
-                    message: 'ERROR in registerUser(), ' + err,
+                    message: 'Oops! Unable to register you',
+                    result: err
                 });
             }else{
                 res.status(200).json({
                     success: true,
-                    message: 'SUCCESS in registerUser()',
-                    userAdded
+                    message: 'Success, you have been registered',
+                    result: userAdded
                 });
             }
         });
     },
 
     authenticateUser(req, res, next){
-        res.send('USER: AUTHENTICATE ROUTE');
+        const email = req.body.email;
+        const password = req.body.password;
+        User.getUserByEmail(email, (err, userFound)=>{
+            if (err){
+                res.status(500).json({
+                    success: false,
+                    message: 'Oops, error! Please come back some other time'
+                })
+            }else if(!userFound){
+                res.status(300).json({
+                    success: false,
+                    message: 'Oops! Email not found'
+                });
+            }else{
+                User.comparePassword(password, userFound.password, (err, passwordsMatch)=>{
+                    if (err){
+                        res.status(500).json({
+                            success: false,
+                            message: 'Oops, error! Please come back some other time'
+                        });
+                    }else if (!passwordsMatch){
+                        res.status(300).json({
+                            success: false,
+                            message: 'Oops! your email and password don\'t match!'
+                        });
+                    }else {
+                        const token = jwt.sign(userFound, databaseConfig.secret, {
+                            expiresIn: 86400    // 1 day in seconds
+                        });
+                        res.status(200).json({
+                            success: true,
+                            message: 'Success, you have been authenticated',
+                            token: 'JWT__' + token,
+                            currentUser: {
+                                _id: userFound._id,
+                                name: userFound.name,
+                                username: userFound.username,
+                                email: userFound.email
+                            }
+                        });
+                    }
+                })
+
+
+            }
+        })
     },
 
     getUserProfile(req, res, next){
-        res.send('USER: PROFILE ROUTE');
+        res.json({
+            currentUser: req.currentUser
+        });
     },
 
     validate(req, res, next){
