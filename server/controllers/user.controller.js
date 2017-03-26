@@ -32,6 +32,7 @@ module.exports = {
     authenticateUser(req, res, next){
         const email = req.body.email;
         const password = req.body.password;
+
         User.getUserByEmail(email, (err, userFound)=>{
             if (err){
                 res.status(500).json({
@@ -62,7 +63,7 @@ module.exports = {
                         res.status(200).json({
                             success: true,
                             message: 'Success, you have been authenticated',
-                            token: 'JWT__' + token,
+                            token: 'JWT ' + token,
                             currentUser: {
                                 _id: userFound._id,
                                 name: userFound.name,
@@ -79,9 +80,7 @@ module.exports = {
     },
 
     getUserProfile(req, res, next){
-        res.json({
-            currentUser: req.currentUser
-        });
+        res.send('PROFILE')
     },
 
     validate(req, res, next){

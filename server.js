@@ -34,19 +34,19 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 
-// passes the express app to masterRoutes, which controls all the API routes
-masterRoutes(app);
-
-
-// initilizes passport lib middleware, for authentication in expess
+// // initilizes passport lib middleware, for authentication in expess
 app.use(passport.initialize());
-
-// initilizing passport session
+//
+// // initilizing passport session
 app.use(passport.session());
 
 // adds passport configurations
 passportConfig(passport);
 
+
+
+// passes the express app to masterRoutes, which controls all the API routes
+masterRoutes(app);
 
 
 
