@@ -42,9 +42,9 @@ User.getUserById = (id, callback)=>{
     User.findById(id, callback);
 }
 
-User.getUserByUsername = (username, callback)=>{
+User.getUserByEmail = (email, callback)=>{
     let query = {
-        username: username
+        email: email
     };
     User.findOne(query, callback);
 }
@@ -64,6 +64,18 @@ User.addUser = (newUser, callback)=>{
             });
         }
     });
+}
+
+User.comparePassword = (candidatePassword, hash, callback)=>{
+    bcrypt.compare(candidatePassword, hash, (err, isMatch)=>{
+        if (err){
+            throw err;
+        }else if (!isMatch){
+            callback(null, false);
+        }else{
+            callback(null, true);
+        }
+    })
 }
 
 module.exports = User;
