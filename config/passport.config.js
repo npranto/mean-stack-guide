@@ -10,7 +10,7 @@ const passportConfig = (passport)=>{
     opts.secretOrKey = databaseConfig.secret;
 
     passport.use(new JwtStrategy(opts, (jwt_payload, done)=>{
-        console.log('JWT PAYLOAD: ', jwt_payload);
+        console.log('PAYLOAD: ', jwt_payload);
         User.getUserById(jwt_payload._doc._id, (err, userFound)=>{
             if(err){
                 return done(err, false);
@@ -25,3 +25,5 @@ const passportConfig = (passport)=>{
 }
 
 module.exports = passportConfig;
+
+
