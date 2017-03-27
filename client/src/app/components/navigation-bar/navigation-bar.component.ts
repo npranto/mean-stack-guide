@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'msg-navigation-bar',
   template: `
     <h1> NavigationBar Component </h1>  
+    <router-outlet></router-outlet>
   `,
   styleUrls: ['./navigation-bar.component.css']
 })
