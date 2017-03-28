@@ -42,8 +42,8 @@ import { Component, OnInit } from '@angular/core';
           <!--</form>-->
           <ul class="nav navbar-nav navbar-right">
             <li><a [routerLink]="['']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Home </a></li>
-            <li><a [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Register </a></li>
-            <li><a [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Login </a></li>
+            <li><a [routerLink]="['/authenticate/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Register </a></li>
+            <li><a [routerLink]="['/authenticate']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Login </a></li>
             <!--<li class="dropdown">-->
               <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Explore <span class="caret"></span></a>-->
               <!--<ul class="dropdown-menu">-->
