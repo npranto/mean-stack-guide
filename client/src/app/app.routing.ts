@@ -1,21 +1,19 @@
 import {Routes, RouterModule} from "@angular/router";
 
 import {HomeComponent} from './components/home/home.component';
-import {RegisterComponent} from "./components/register/register.component";
-import {LoginComponent} from "./components/login/login.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {AuthenticateComponent} from './components/authenticate/authenticate.component';
+import {LoginComponent} from './components/login/login.component';
 
+import {authenticateRoutes} from './routes/authenticate.routes';
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent
   },
   {
-    path: 'register', component: RegisterComponent
-  },
-  {
-    path: 'login', component: LoginComponent
+    path: 'authenticate', component: AuthenticateComponent, children: authenticateRoutes
   },
   {
     path: 'dashboard', component: DashboardComponent
