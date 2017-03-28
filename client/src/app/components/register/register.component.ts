@@ -12,7 +12,6 @@ declare const $: any;
         <button>create</button>
         <p class="message">Already registered? <a>Sign In</a></p>
       </form>
-    
   `,
   styleUrls: ['./register.component.css', './../authenticate/authenticate.component.css']
 })
