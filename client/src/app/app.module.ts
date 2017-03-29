@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
+import {UserAuthFormValidationService} from "./services/user-auth-form-validation.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
     HttpModule,
     rootRoutes
   ],
-  providers: [],
+  providers: [
+    UserAuthFormValidationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
