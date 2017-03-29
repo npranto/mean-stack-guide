@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserRegister} from "../../interfaces/user-register";
+import {NgForm} from "@angular/forms";
 
 declare const $: any;
 
@@ -12,12 +14,61 @@ declare const $: any;
     
     <div class="login-page col-sm-12 col-md-12 col-lg-12">
       <div class="form">
-        <form class="register-form">
-          <input type="text" placeholder="name"/>
-          <input type="password" placeholder="password"/>
-          <input type="text" placeholder="email address"/>
-          <button>create</button>
-          <p class="message">Already registered? <a>Sign In</a></p>
+        <form class="register-form" (ngSubmit)="register(userRegisterForm)" #userRegisterForm="ngForm">
+          <input 
+            type="text" 
+            placeholder="Name"
+            id="name" 
+            class="form-control"
+            name="title" 
+            required 
+            minlength="1"
+            maxlength="255"
+            [(ngModel)]="newUser.name" 
+            #name="ngModel"/>
+            
+          <input 
+            type="text" 
+            placeholder="Username"
+            id="username" 
+            name="username" 
+            class="form-control"
+            required 
+            minlength="1"
+            maxlength="255"
+            [(ngModel)]="newUser.username" 
+            #username="ngModel"/>
+          
+          <input 
+            type="email" 
+            placeholder="Email"
+            id="email" 
+            name="email" 
+            class="form-control"
+            pattern="[a-z0-9!#$%&'*+/=?^_'{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_'{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+            required 
+            [(ngModel)]="newUser.email" 
+            #email="ngModel"/>
+
+          <input 
+            type="password" 
+            placeholder="Password"
+            id="password" 
+            class="form-control"
+            name="password" 
+            minlength="6"
+            maxlength="255"
+            required 
+            [(ngModel)]="newUser.password" 
+            #password="ngModel"/>
+          <button type="submit">register</button>
+          <p class="message">Already registered? 
+            <a 
+                [routerLink]="['/authenticate/login']" 
+                [routerLinkActive]="['active']" 
+                [routerLinkActiveOptions]="{exact: true}">
+                login
+            </a></p>
         </form>
       </div>
     </div>  
@@ -28,10 +79,23 @@ declare const $: any;
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  newUser: UserRegister = {
+    name: '',
+    username: '',
+    email: '',
+    password: ''
+  }
+
+  constructor() {
+
+  }
 
   ngOnInit() {
 
+  }
+
+  register(userRegisterForm: NgForm){
+    console.log(userRegisterForm.value);
   }
 
 }
