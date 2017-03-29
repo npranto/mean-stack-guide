@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserRegister} from "../../interfaces/user-register";
 import {NgForm} from "@angular/forms";
 import {User} from "../../classes/user";
+import {UserAuthFormValidationService} from "../../services/user-auth-form-validation.service";
 
 declare const $: any;
 
@@ -87,7 +88,7 @@ export class RegisterComponent implements OnInit {
     password: ''
   }
 
-  constructor() {
+  constructor(private userAuthFormValidationService: UserAuthFormValidationService) {
 
   }
 
@@ -96,8 +97,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(userRegisterForm: NgForm){
-    let newUser = new User(this.newUser.name, this.newUser.username, this.newUser.email, this.newUser.password);
-    console.log(newUser);
+    this.userAuthFormValidationService.validateRegisterForm(this.newUser);
   }
 
 }
