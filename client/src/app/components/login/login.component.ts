@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserLogin} from "../../interfaces/user-login";
+import {NgForm} from "@angular/forms";
 
 declare const $: any;
 
@@ -12,11 +14,38 @@ declare const $: any;
     
     <div class="login-page col-sm-12 col-md-12 col-lg-12">
       <div class="form">
-        <form class="login-form">
-          <input type="text" placeholder="username"/>
-          <input type="password" placeholder="password"/>
-          <button>login</button>
-          <p class="message">Not registered? <a>Create an account</a></p>
+        <form class="login-form" (ngSubmit)="login(userLoginForm)" #userLoginForm="ngForm">
+          <input 
+            type="text" 
+            placeholder="Username"
+            id="username" 
+            name="username" 
+            required 
+            minlength="1"
+            maxlength="255"
+            [(ngModel)]="newUser.username" 
+            #username="ngModel"/>
+          
+          <input 
+            type="password" 
+            placeholder="Password"
+            id="password" 
+            name="password" 
+            minlength="6"
+            maxlength="255"
+            required 
+            [(ngModel)]="newUser.password" 
+            #password="ngModel"/>
+            
+          <button type="submit">login</button>
+          <p class="message">Not registered? 
+            <a 
+                [routerLink]="['/authenticate/register']" 
+                [routerLinkActive]="['active']" 
+                [routerLinkActiveOptions]="{exact: true}">
+                Register
+            </a>
+          </p>
         </form>
       </div>
     </div>    
@@ -29,10 +58,19 @@ declare const $: any;
 })
 export class LoginComponent implements OnInit {
 
+  newUser: UserLogin = {
+    username: '',
+    password: ''
+  }
+
   constructor() { }
 
   ngOnInit() {
 
+  }
+
+  login(userLoginForm: NgForm){
+    console.log(userLoginForm.value);
   }
 
 }
