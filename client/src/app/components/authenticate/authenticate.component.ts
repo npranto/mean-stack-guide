@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnChanges} from '@angular/core';
+import {ActivatedRoute, RouterOutlet, RouterLinkActive, Router} from "@angular/router";
 
 declare const $: any;
 
@@ -6,28 +7,23 @@ declare const $: any;
   selector: 'msg-authenticate',
   template: `
    
-    <div class="page-header col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-      <h1 class="text-center">  <small></small></h1>
-    </div>
-    
-    <div class="login-page col-sm-12 col-md-12 col-lg-12">
-      <div class="form">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
     
   `,
   styleUrls: ['./authenticate.component.css']
 })
-export class AuthenticateComponent implements OnInit {
+export class AuthenticateComponent implements OnInit, OnChanges {
 
-  authType: {
+  constructor(private router: Router) { }
+
+  ngOnInit() {
 
   }
 
-  constructor() { }
 
-  ngOnInit() {
+
+  ngOnChanges(){
+    console.log(this.router.url);
   }
 
 }
