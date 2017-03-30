@@ -15,6 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
 import {UserAuthFormValidationService} from "./services/user-auth-form-validation.service";
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {UserAuthFormValidationService} from "./services/user-auth-form-validatio
     FlashMessagesModule
   ],
   providers: [
-    UserAuthFormValidationService
+    UserAuthFormValidationService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

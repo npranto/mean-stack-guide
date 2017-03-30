@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {UserRegister} from "../../interfaces/user-register";
 import {NgForm} from "@angular/forms";
 import {User} from "../../classes/user";
 import {UserAuthFormValidationService} from "../../services/user-auth-form-validation.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
-
+import {AuthService} from "../../services/auth.service";
+import {Route, Router} from "@angular/router";
 
 declare const $: any;
 
@@ -83,7 +84,7 @@ declare const $: any;
   `,
   styleUrls: ['./register.component.css', './../authenticate/authenticate.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   newUser: UserRegister = {
     name: '',
@@ -92,7 +93,12 @@ export class RegisterComponent implements OnInit {
     password: ''
   }
 
-  constructor(private userAuthFormValidationService: UserAuthFormValidationService, private flashMessagesService: FlashMessagesService) {
+  constructor(
+    private userAuthFormValidationService: UserAuthFormValidationService,
+    private flashMessagesService: FlashMessagesService,
+    private authService: AuthService,
+    private router: Router
+  ) {
 
   }
 
@@ -104,6 +110,14 @@ export class RegisterComponent implements OnInit {
     if(this.validateRegisterForm(this.newUser)){
       console.log('NEW USER: ', this.newUser);
       const newUser = new User(this.newUser.name, this.newUser.username, this.newUser.email, this.newUser.password);
+      let registerUserSubs = this.authService.registerUser(newUser).subscribe((response)=>{
+        console.log('NEW USER SAVED: ', response);
+        this.flashMessagesService.show('Success!', { cssClass: 'alert-success', timeout: 2500 });
+        setTimeout(()=>{
+          this.router.navigate(['/authenticate/login']);
+        }, 2500);
+      })
+
     }
 
   }
@@ -131,6 +145,10 @@ export class RegisterComponent implements OnInit {
     }
 
     return true;
+  }
+
+  ngOnDestroy(){
+
   }
 
 }
