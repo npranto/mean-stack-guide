@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
 import {UserAuthFormValidationService} from "./services/user-auth-form-validation.service";
 import {AuthService} from "./services/auth.service";
+import { LoadingEffectComponent } from './components/loading-effect/loading-effect.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AuthService} from "./services/auth.service";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    LoadingEffectComponent
   ],
   imports: [
     BrowserModule,
