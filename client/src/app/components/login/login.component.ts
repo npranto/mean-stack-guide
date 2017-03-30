@@ -15,7 +15,7 @@ declare const $: any;
     </div>
     
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <flash-messages class="text-center col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3"></flash-messages>
+        <flash-messages class="text-center col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3"></flash-messages>
     </div>
     
     <div class="login-page col-sm-12 col-md-12 col-lg-12">

@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 
 // serves static files (public/client files) in express
-app.use('/', express.static(path.join(__dirname, 'public')));
+// app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 
