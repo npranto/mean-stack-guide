@@ -18,7 +18,7 @@ export class UserAuthFormValidationService {
   }
 
   passesValidateEmptyFieldsDuringLogin(user: UserLogin){
-    if (user.username.length > 0 &&
+    if (user.email.length > 0 &&
         user.password.length > 0){
         return true;
     }
