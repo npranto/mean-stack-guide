@@ -1,11 +1,6 @@
 
 .loader {
-  border: 1em solid #f3f3f3; /* Light grey */
-  border-top: 1em solid #3498db; /* Blue */
   border-radius: 50%;
-  width: 7em;
-  height: 7em;
-  margin: 1em auto;
   animation: spin 2s linear infinite;
 }
 
@@ -21,6 +16,15 @@
 and (min-device-width: 320px)
 and (max-device-width: 767px)
 and (-webkit-min-device-pixel-ratio: 2) {
+
+  .loader{
+    border: 0.57em solid #f3f3f3; /* Light grey */
+    border-top: 0.57em solid #3498db; /* Blue */
+    width: 4em;
+    height: 4em;
+    margin: 0.42em auto;
+    animation: spin 2s linear infinite;
+  }
 
 }
 
@@ -58,7 +62,14 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (-webkit-min-device-pixel-ratio: 1) {
 
-
+  .loader{
+    border: 0.85em solid #f3f3f3; /* Light grey */
+    border-top: 0.85em solid #3498db; /* Blue */
+    width: 6em;
+    height: 6em;
+    margin: 0.42em auto;
+    animation: spin 2s linear infinite;
+  }
 
 }
 
@@ -95,6 +106,15 @@ and (-webkit-min-device-pixel-ratio: 1) {
 and (min-device-width: 1025px)
 and (-webkit-min-device-pixel-ratio: 1) {
 
+  .loader{
+    border: 1em solid #f3f3f3; /* Light grey */
+    border-top: 1em solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 7em;
+    height: 7em;
+    margin: 1em auto;
+    animation: spin 2s linear infinite;
+  }
 
 }
 
@@ -104,6 +124,14 @@ and (min-device-width: 1200px)
 and (-webkit-min-device-pixel-ratio: 2)
 and (min-resolution: 192dpi) {
 
-
+  .loader{
+    border: 1em solid #f3f3f3; /* Light grey */
+    border-top: 1em solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 7em;
+    height: 7em;
+    margin: 1em auto;
+    animation: spin 2s linear infinite;
+  }
 
 }

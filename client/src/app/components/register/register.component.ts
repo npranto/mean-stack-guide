@@ -21,8 +21,8 @@ declare const $: any;
         <flash-messages class="text-center col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3"></flash-messages>
     </div>
     
-    <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-      <msg-loading-effect></msg-loading-effect>
+    <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4" [hidden]="showLoader === false">
+        <msg-loading-effect></msg-loading-effect>
     </div>
              
     <div class="login-page col-sm-12 col-md-12 col-lg-12">
@@ -72,7 +72,7 @@ declare const $: any;
             required 
             [(ngModel)]="newUser.password" 
             #password="ngModel"/>
-          <button type="submit">register</button>
+          <button type="submit" [disabled]="showLoader === true">register</button>
           <p class="message">Already registered? 
             <a 
                 [routerLink]="['/authenticate/login']" 
@@ -97,13 +97,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     password: ''
   }
 
+  showLoader: boolean;
+
   constructor(
     private userAuthFormValidationService: UserAuthFormValidationService,
     private flashMessagesService: FlashMessagesService,
     private authService: AuthService,
     private router: Router
   ) {
-
+    this.showLoader = false;
   }
 
   ngOnInit() {
@@ -116,9 +118,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const newUser = new User(this.newUser.name, this.newUser.username, this.newUser.email, this.newUser.password);
       let registerUserSubs = this.authService.registerUser(newUser).subscribe((response)=>{
         console.log('NEW USER SAVED: ', response);
+        this.showLoader = !this.showLoader;
         setTimeout(()=>{
           this.router.navigate(['/authenticate/login']);
-        }, 2500);
+          this.showLoader = !this.showLoader;
+        }, 2000);
       })
 
     }
