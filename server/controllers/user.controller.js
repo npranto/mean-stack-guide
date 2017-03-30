@@ -40,7 +40,7 @@ module.exports = {
                     message: 'Oops, error! Please come back some other time'
                 })
             }else if(!userFound){
-                res.status(300).json({
+                res.status(200).json({
                     success: false,
                     message: 'Oops! Email not found'
                 });
@@ -52,7 +52,7 @@ module.exports = {
                             message: 'Oops, error! Please come back some other time'
                         });
                     }else if (!passwordsMatch){
-                        res.status(300).json({
+                        res.status(200).json({
                             success: false,
                             message: 'Oops! your email and password don\'t match!'
                         });

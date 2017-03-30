@@ -3,6 +3,7 @@ import {UserLogin} from "../../interfaces/user-login";
 import {NgForm} from "@angular/forms";
 import {UserAuthFormValidationService} from "../../services/user-auth-form-validation.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {AuthService} from "../../services/auth.service";
 
 declare const $: any;
 
@@ -22,15 +23,14 @@ declare const $: any;
       <div class="form">
         <form class="login-form" (ngSubmit)="login(userLoginForm)" #userLoginForm="ngForm">
           <input 
-            type="text" 
-            placeholder="Username"
-            id="username" 
-            name="username" 
+            type="email" 
+            placeholder="Email"
+            id="email" 
+            name="email" 
             required 
-            minlength="1"
             maxlength="255"
-            [(ngModel)]="user.username" 
-            #username="ngModel"/>
+            [(ngModel)]="user.email" 
+            #email="ngModel"/>
           
           <input 
             type="password" 
@@ -64,11 +64,17 @@ declare const $: any;
 export class LoginComponent implements OnInit {
 
   user: UserLogin = {
-    username: '',
+    email: '',
     password: ''
   }
 
-  constructor(private userAuthFormValidationService: UserAuthFormValidationService, private flashMessagesService: FlashMessagesService) { }
+  constructor(
+    private userAuthFormValidationService: UserAuthFormValidationService,
+    private flashMessagesService: FlashMessagesService,
+    private authService: AuthService
+  ) {
+
+  }
 
   ngOnInit() {
 
@@ -76,7 +82,13 @@ export class LoginComponent implements OnInit {
 
   login(userLoginForm: NgForm){
     if (this.validateLoginForm(this.user)){
-      console.log('USER ', this.user);
+      this.authService.authenticateUser(this.user).subscribe((response)=>{
+        if (response.success === false) {
+          this.flashMessagesService.show(response.message, {cssClass: 'alert-danger', timeout: 5000});
+        }else{
+          console.log(response);
+        }
+      })
     }
   }
 
@@ -87,8 +99,8 @@ export class LoginComponent implements OnInit {
       return false;
     }
 
-    if (!this.userAuthFormValidationService.passesValidateUsernameFormat(user.username)){
-      this.flashMessagesService.show('Oops! Your username must contain only letters or numbers', { cssClass: 'alert-danger', timeout: 5000 });
+    if (!this.userAuthFormValidationService.passesValidateEmailFormat(user.email)){
+      this.flashMessagesService.show('Oops! Please enter a proper email', { cssClass: 'alert-danger', timeout: 5000 });
       return false;
     }
 
