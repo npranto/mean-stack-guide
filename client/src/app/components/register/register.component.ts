@@ -21,6 +21,10 @@ declare const $: any;
         <flash-messages class="text-center col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3"></flash-messages>
     </div>
     
+    <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+      <msg-loading-effect></msg-loading-effect>
+    </div>
+             
     <div class="login-page col-sm-12 col-md-12 col-lg-12">
       <div class="form">
         <form class="register-form" (ngSubmit)="register(userRegisterForm)" #userRegisterForm="ngForm">
@@ -112,7 +116,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const newUser = new User(this.newUser.name, this.newUser.username, this.newUser.email, this.newUser.password);
       let registerUserSubs = this.authService.registerUser(newUser).subscribe((response)=>{
         console.log('NEW USER SAVED: ', response);
-        this.flashMessagesService.show('Success!', { cssClass: 'alert-success', timeout: 2500 });
         setTimeout(()=>{
           this.router.navigate(['/authenticate/login']);
         }, 2500);
