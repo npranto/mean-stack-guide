@@ -1,35 +1,26 @@
 import { Injectable } from '@angular/core';
 import {UserRegister} from "../interfaces/user-register";
+import {UserLogin} from "../interfaces/user-login";
 
 @Injectable()
 export class UserAuthFormValidationService {
 
   constructor() { }
 
-  validateRegisterForm(newUser: UserRegister){
-    if (!this.passesValidateEmptyFields(newUser)){
-      console.log('Oops! Please fill in all the fields')
-    }
-
-    if (!this.passesValidateEmailFormat(newUser.email)){
-      console.log('Oops! Please enter a proper email')
-    }
-
-    if (!this.passesValidatePasswordMinimum(newUser.password)){
-      console.log('Oops! Your password MUST be more than 5 characters long')
-    }
-
-    if (!this.passesValidateUsernameFormat(newUser.username)){
-      console.log('Oops! Your username must contain only letters or numbers');
-    }
-  }
-
-  passesValidateEmptyFields(newUser: UserRegister){
+  passesValidateEmptyFieldsDuringRegister(newUser: UserRegister){
     if (newUser.name.length > 0 &&
         newUser.username.length > 0 &&
         newUser.email.length > 0 &&
         newUser.password.length > 0){
       return true;
+    }
+    return false;
+  }
+
+  passesValidateEmptyFieldsDuringLogin(user: UserLogin){
+    if (user.username.length > 0 &&
+        user.password.length > 0){
+        return true;
     }
     return false;
   }
