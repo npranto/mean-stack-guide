@@ -3,6 +3,8 @@ import {UserRegister} from "../../interfaces/user-register";
 import {NgForm} from "@angular/forms";
 import {User} from "../../classes/user";
 import {UserAuthFormValidationService} from "../../services/user-auth-form-validation.service";
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 declare const $: any;
 
@@ -12,6 +14,10 @@ declare const $: any;
 
     <div class="page-header col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
       <h1 class="text-center"> Register <small></small></h1>
+    </div>
+    
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <flash-messages class="text-center col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3"></flash-messages>
     </div>
     
     <div class="login-page col-sm-12 col-md-12 col-lg-12">
@@ -47,7 +53,6 @@ declare const $: any;
             id="email" 
             name="email" 
             class="form-control"
-            pattern="[a-z0-9!#$%&'*+/=?^_'{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_'{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             required 
             [(ngModel)]="newUser.email" 
             #email="ngModel"/>
@@ -58,7 +63,6 @@ declare const $: any;
             id="password" 
             class="form-control"
             name="password" 
-            minlength="6"
             maxlength="255"
             required 
             [(ngModel)]="newUser.password" 
@@ -88,7 +92,7 @@ export class RegisterComponent implements OnInit {
     password: ''
   }
 
-  constructor(private userAuthFormValidationService: UserAuthFormValidationService) {
+  constructor(private userAuthFormValidationService: UserAuthFormValidationService, private flashMessagesService: FlashMessagesService) {
 
   }
 
@@ -97,7 +101,36 @@ export class RegisterComponent implements OnInit {
   }
 
   register(userRegisterForm: NgForm){
-    this.userAuthFormValidationService.validateRegisterForm(this.newUser);
+    if(this.validateRegisterForm(this.newUser)){
+      console.log('NEW USER: ', this.newUser);
+      const newUser = new User(this.newUser.name, this.newUser.username, this.newUser.email, this.newUser.password);
+    }
+
+  }
+
+  validateRegisterForm(newUser: UserRegister){
+
+    if (!this.userAuthFormValidationService.passesValidateEmptyFieldsDuringRegister(newUser)){
+      this.flashMessagesService.show('Oops! Please fill in all the fields', { cssClass: 'alert-danger', timeout: 5000 });
+      return false;
+    }
+
+    if (!this.userAuthFormValidationService.passesValidateUsernameFormat(newUser.username)){
+      this.flashMessagesService.show('Oops! Your username must contain only letters or numbers', { cssClass: 'alert-danger', timeout: 5000 });
+      return false;
+    }
+
+    if (!this.userAuthFormValidationService.passesValidateEmailFormat(newUser.email)){
+      this.flashMessagesService.show('Oops! Please enter a proper email', { cssClass: 'alert-danger', timeout: 5000 });
+      return false;
+    }
+
+    if (!this.userAuthFormValidationService.passesValidatePasswordMinimum(newUser.password)){
+      this.flashMessagesService.show('Oops! Your password MUST be longer than 5 characters', { cssClass: 'alert-danger', timeout: 5000 });
+      return false;
+    }
+
+    return true;
   }
 
 }

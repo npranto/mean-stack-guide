@@ -73,7 +73,7 @@
   version "2.4.10"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-2.4.10.tgz#a3a682d2228fa30ec23dd0eb57c8e887fba26997"
 
-"@angular/compiler-cli@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0", "@angular/compiler-cli@^2.4.0":
+"@angular/compiler-cli@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0", "@angular/compiler-cli@^2.4.0", "@angular/compiler-cli@^2.4.4":
   version "2.4.10"
   resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-2.4.10.tgz#c21143bfaab45231c8d2eaa82456bed3d39f91a3"
   dependencies:
@@ -104,6 +104,12 @@
 "@angular/platform-browser@^2.4.0":
   version "2.4.10"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-2.4.10.tgz#cbf25608148fb4ffef96cc5005ba5d7b3e093906"
+
+"@angular/platform-server@^2.4.4":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-2.4.10.tgz#ede03075081f807ed83dd8ec92f2924858fb3455"
+  dependencies:
+    parse5 "^2.2.1"
 
 "@angular/router@^3.4.0":
   version "3.4.10"
@@ -216,6 +222,13 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular2-flash-messages@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/angular2-flash-messages/-/angular2-flash-messages-1.0.5.tgz#56a059d86161971993b76c5101fa7b282056def2"
+  dependencies:
+    "@angular/compiler-cli" "^2.4.4"
+    "@angular/platform-server" "^2.4.4"
 
 ansi-align@^1.1.0:
   version "1.1.0"
@@ -3310,6 +3323,10 @@ parse-json@^2.1.0, parse-json@^2.2.0:
   resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-2.2.0.tgz#f480f40434ef80741f8469099f8dea18f55a4dc9"
   dependencies:
     error-ex "^1.2.0"
+
+parse5@^2.2.1:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-2.2.3.tgz#0c4fc41c1000c5e6b93d48b03f8083837834e9f6"
 
 parsejson@0.0.3:
   version "0.0.3"
