@@ -25,7 +25,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
     return this.http
-      .post(`${this.domain}/api/user/register`, newUser, new RequestOptions({headers: headers}))
+      .post(`/api/user/register`, newUser, new RequestOptions({headers: headers}))
       .map((response)=>{
         return response.json();
       })
@@ -37,7 +37,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
     return this.http
-      .post(`${this.domain}/api/user/authenticate`, user, new RequestOptions({headers: headers}))
+      .post(`/api/user/authenticate`, user, new RequestOptions({headers: headers}))
       .map((response)=>{
         return response.json();
       })
@@ -48,7 +48,7 @@ export class AuthService {
       'Authorization': localStorage.getItem('id_token')
     });
     return this.http
-      .get(`${this.domain}/api/user/profile`, new RequestOptions({headers: headers}))
+      .get(`/api/user/profile`, new RequestOptions({headers: headers}))
       .map((response)=>{
         return response.json();
       })
