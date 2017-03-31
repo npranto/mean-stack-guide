@@ -52,7 +52,7 @@ masterRoutes(app);
 
 // connect to the database
 mongoose.connect(databaseConfig.database);
-
+33
 // on connect
 mongoose.connection.on('connected', ()=>{
     console.log(`Connected to database: ${databaseConfig.database}`);
@@ -64,7 +64,7 @@ mongoose.connection.on('error', (error)=>{
 })
 
 app.get('*', (req, res, next)=>{
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile('index.html');
 })
 
 // tells app to start listening to the server
