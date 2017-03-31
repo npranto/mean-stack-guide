@@ -13,7 +13,7 @@ const masterRoutes = require('./server/master.routes');
 
 
 const app = express();  // initializes app with express
-const PORT = 9999;      // sets port number, which will be the localhost that the app will be served on
+const PORT = process.env.PORT || 8080;      // sets port number, which will be the localhost that the app will be served on
 
 
 
