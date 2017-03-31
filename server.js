@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 
 // serves static files (public/client files) in express
-// app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'dist')));
 
 
 
@@ -63,7 +63,9 @@ mongoose.connection.on('error', (error)=>{
     console.log(`Error in Database: ${error}`);
 })
 
-
+app.get('*', (req, res, next)=>{
+    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+})
 
 // tells app to start listening to the server
 app.listen(PORT, ()=>{
