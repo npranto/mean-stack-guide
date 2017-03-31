@@ -64,7 +64,7 @@ mongoose.connection.on('error', (error)=>{
 })
 
 app.get('*', (req, res, next)=>{
-    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 })
 
 // tells app to start listening to the server
