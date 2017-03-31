@@ -9,7 +9,7 @@ declare const $: any;
     <div class="jumbotron">
       <h1> Welcome to <br> MEAN Stack Guide </h1>
       <p> A unique bootstrap, boilterplate, starter kit and a guide to a complete MongoDB, Express, Angular and NodeJS application for end to end development </p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button"> Explore! </a></p>
+      <p><a class="btn btn-primary btn-lg" [routerLink]="['/authenticate/login']" role="button"> Explore! </a></p>
     </div> 
     
     <div class="page-header">

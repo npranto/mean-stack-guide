@@ -17,6 +17,7 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
 import {UserAuthFormValidationService} from "./services/user-auth-form-validation.service";
 import {AuthService} from "./services/auth.service";
 import { LoadingEffectComponent } from './components/loading-effect/loading-effect.component';
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoadingEffectComponent } from './components/loading-effect/loading-effe
   ],
   providers: [
     UserAuthFormValidationService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
