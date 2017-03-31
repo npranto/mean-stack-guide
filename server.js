@@ -13,7 +13,7 @@ const masterRoutes = require('./server/master.routes');
 
 
 const app = express();  // initializes app with express
-const PORT = process.env.PORT || 8080;      // sets port number, which will be the localhost that the app will be served on
+const PORT = 9999;      // sets port number, which will be the localhost that the app will be served on
 
 
 
@@ -52,7 +52,7 @@ masterRoutes(app);
 
 // connect to the database
 mongoose.connect(databaseConfig.database);
-33
+
 // on connect
 mongoose.connection.on('connected', ()=>{
     console.log(`Connected to database: ${databaseConfig.database}`);
@@ -64,7 +64,7 @@ mongoose.connection.on('error', (error)=>{
 })
 
 app.get('*', (req, res, next)=>{
-    res.sendFile('index.html');
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 })
 
 // tells app to start listening to the server
