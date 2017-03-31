@@ -7,6 +7,7 @@ import {AuthenticateComponent} from './components/authenticate/authenticate.comp
 import {LoginComponent} from './components/login/login.component';
 
 import {authenticateRoutes} from './routes/authenticate.routes';
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -16,10 +17,10 @@ const routes: Routes = [
     path: 'authenticate', component: AuthenticateComponent, children: authenticateRoutes
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'profile', component: ProfileComponent
+    path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard]
   },
   {
     path: '**', redirectTo: ''

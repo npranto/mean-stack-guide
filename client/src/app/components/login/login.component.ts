@@ -4,6 +4,7 @@ import {NgForm} from "@angular/forms";
 import {UserAuthFormValidationService} from "../../services/user-auth-form-validation.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 declare const $: any;
 
@@ -71,7 +72,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private userAuthFormValidationService: UserAuthFormValidationService,
     private flashMessagesService: FlashMessagesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
 
   }
@@ -83,10 +85,12 @@ export class LoginComponent implements OnInit {
   login(userLoginForm: NgForm){
     if (this.validateLoginForm(this.user)){
       this.authService.authenticateUser(this.user).subscribe((response)=>{
-        if (response.success === false) {
-          this.flashMessagesService.show(response.message, {cssClass: 'alert-danger', timeout: 5000});
+        if (response.success){
+          console.log('USER FOUND: ', response);
+          this.authService.storeCurrentUserInfo(response.token, response.currentUser);
+          this.router.navigate(['/dashboard', this.authService.currentUser['username']]);
         }else{
-          console.log(response);
+          this.flashMessagesService.show(response.message, { cssClass: 'alert-danger', timeout: 3000 });
         }
       })
     }

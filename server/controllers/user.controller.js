@@ -80,7 +80,7 @@ module.exports = {
     },
 
     getUserProfile(req, res, next){
-        res.json({
+        res.status(200).json({
             currentUser: req.user
         });
     },

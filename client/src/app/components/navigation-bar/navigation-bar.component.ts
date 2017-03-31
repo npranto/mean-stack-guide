@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'msg-navigation-bar',
@@ -41,9 +43,12 @@ import { Component, OnInit } from '@angular/core';
             <!--<button type="submit" class="btn btn-default">Submit</button>-->
           <!--</form>-->
           <ul class="nav navbar-nav navbar-right">
-            <li><a [routerLink]="['']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Home </a></li>
-            <li><a [routerLink]="['/authenticate/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Register </a></li>
-            <li><a [routerLink]="['/authenticate']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Login </a></li>
+            <li><a *ngIf="!authService.loggedIn()" [routerLink]="['']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Home </a></li>
+            <li><a *ngIf="authService.loggedIn()" [routerLink]="['/profile', authService.currentUser['username']]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Profile </a></li>
+            <li><a *ngIf="authService.loggedIn()" [routerLink]="['/dashboard', authService.currentUser['username']]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Dashboard </a></li>
+            <li><a *ngIf="!authService.loggedIn()" [routerLink]="['/authenticate/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Register </a></li>
+            <li><a *ngIf="!authService.loggedIn()" [routerLink]="['/authenticate']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> Login </a></li>
+            <li><a *ngIf="authService.loggedIn()" (click)="logoutUser()"> Logout </a></li>
             <!--<li class="dropdown">-->
               <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Explore <span class="caret"></span></a>-->
               <!--<ul class="dropdown-menu">-->
@@ -63,9 +68,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logoutUser(){
+    this.authService.logoutUser();
+    this.router.navigate(['']);
   }
 
 }
